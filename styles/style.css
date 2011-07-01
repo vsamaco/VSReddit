@@ -1,0 +1,623 @@
+/*
+Theme Name: vs.reddit
+Description: Basic Theme for vs.reddit
+Version: 1.0
+Author: Vincent Samaco 
+Author URI: http://www.vincentsamaco.com/
+Date: 2/22/2011
+*/
+
+body {
+  background-color:#E6E2DF;
+  color: #000000;
+  font-size: 12px;
+	font-family: arial, helvetica, sans-serif;
+	text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: arial, helvetica, sans-serif;  
+	line-height: normal;
+	margin: 0;
+	padding: 0;
+}
+
+#wrap {
+  position: relative;
+  margin: 0 auto;
+  text-align: left;
+  width: 960px;
+}
+
+#header {
+	position: fixed;
+	top:0;
+	background-color: #000000;
+	color: #ffffff;
+	height: 45px;
+	width: 100%;
+	z-index: 50;
+}
+
+#header .header-content {
+	position: relative;
+	margin: 0 auto;
+	text-align: left;
+	width: 960px;	
+}
+
+#header #header-user {
+	float: left;
+}
+
+#header #sitename {
+	font-size: 30px;
+	line-height: 40px;
+}
+
+#header .reload-btn {
+	position: absolute;
+	background-color: #444;
+	color: #fff;
+	font-size: 12px;
+	text-transform: uppercase;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	top: 10px;
+	left: 200px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+#header #submit-link-btn {
+	position: absolute;
+	background-color: #444;
+	color: #fff;
+	font-size: 12px;
+	text-transform: uppercase;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	left: 300px;
+	top: 10px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+#header #categories {
+	position: absolute;
+	right: 280px;
+	top: 10px;
+}
+
+#header #categories .label {
+	float: right;
+	background-color: #444;
+	color: #fff;
+	font-size: 12px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	text-transform: uppercase;
+	padding: 5px;
+}
+
+#header #categories .arrow-btn {
+	float: right;
+	background-color: #444;
+	color: #fff;
+	margin: 0 0 0 1px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	width: 20px;
+	height: 22px;
+}
+
+#header #categories .arrow-btn .down {
+	color: #fff;
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid #fff;
+	margin: 8px auto 0;
+}
+
+#header #categories ul#category-list {
+	list-style: none;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	padding: 3px 0;
+}
+
+#header #categories ul#category-list li {
+	list-style: none;
+	color: #000;
+	cursor: pointer;
+}
+
+#header #categories ul#category-list li.option {
+	background-color: #fff;
+	color: #000;
+	display: block;
+	padding: 3px;
+	margin: 0 3px;
+}
+
+#header #categories ul#category-list li:hover {
+	background-color: #ddd;
+}
+
+#header .login-btn {
+	background-color: #0693D9;
+	color: #fff;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+#header #nav-account {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+#header #nav-account .name {
+	float: left;
+	background-color: #444;
+	color: #fff;
+	font-size: 12px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	text-transform: lowercase;
+	padding: 5px;
+}
+
+#header #nav-account .arrow-btn {
+	float: right;
+	background-color: #444;
+	color: #fff;
+	margin: 0 0 0 1px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	width: 20px;
+	height: 22px;
+}
+
+#header #nav-account .arrow-btn .down {
+	color: #fff;
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid #fff;
+	margin: 8px auto 0;
+}
+
+#header #nav-account #nav-account-list {
+	list-type: none;
+	background-color: #fff;
+	padding: 3px 0;
+}
+
+#header #nav-account #nav-account-list li {
+	background-color: #fff;
+	color: #000;
+	display: block;
+	padding: 3px;
+	margin: 0 3px;
+	cursor: pointer;
+}
+
+#header #nav-account #nav-account-list li:hover {
+	background-color: #ddd;
+}
+
+
+
+#content {
+	width: 960px;
+	margin: 45px auto 25px;
+}
+
+#content #main {
+	background-color: #fff;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	float: left;
+	width: 660px;
+	min-height: 425px;
+	margin: 20px 10px 0 0;
+	padding: 10px;
+}
+
+#content #right-sidebar {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;	
+	float: left;
+	width: 260px;	
+	margin: 20px 0 0;
+}
+
+#content #right-sidebar #submit-link-btn {
+	background-color: #0693D9;
+	color: #fff;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;	
+	font-size: 16px;
+	text-align: center;
+	padding: 5px;
+	margin: 0 0 10px 0;
+	cursor: pointer;
+}
+
+#content #right-sidebar #recent-views,
+#content #right-sidebar #my-upvotes,
+#content #right-sidebar #my-downvotes {
+	background-color: #fff;
+	color: #000;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	padding: 5px;
+	margin: 0 0 10px 0;
+}
+
+#content #right-sidebar #recent-views h2,
+#content #right-sidebar #my-upvotes h2,
+#content #right-sidebar #my-downvotes h2 {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 5px;
+}
+
+#content #right-sidebar #recent-views ul,
+#content #right-sidebar #my-upvotes ul,
+#content #right-sidebar #my-downvotes ul {
+	list-style: none;
+	margin: 5px 0;
+}
+
+#content #right-sidebar #recent-views ul li,
+#content #right-sidebar #my-upvotes ul li,
+#content #right-sidebar #my-downvotes ul li {
+	list-style: none;
+	border-bottom: 1px solid #ddd;
+	padding: 3px 0px;
+	margin: 3px 0 3px 5px;
+}
+
+#content #right-sidebar #recent-views ul li .title a,
+#content #right-sidebar #my-upvotes ul li .title a,
+#content #right-sidebar #my-downvotes ul li .title a {
+	text-decoration: none;
+	color: #0693D9;
+	font-size: 12px;
+}
+
+#content #right-sidebar #recent-views ul li .status,
+#content #right-sidebar #my-upvotes ul li .status,
+#content #right-sidebar #my-downvotes ul li .status {
+	color: #999;
+	font-size: 12px;
+	margin: 3px 0;
+}
+
+#content div#sort-type {
+	float: right;
+	text-align: right;	
+	margin: 5px 0;
+}
+
+#content div#sort-type a {
+	font-size: 12px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	padding: 5px;
+	text-decoration: none;
+}
+
+#content div#sort-type a.selected {
+	background-color: #0693D9;
+	color: #fff;
+}
+
+#content div.messages p.message {
+	border: 1px solid orange;
+	background-color: #F6E69F;
+	color: #000;
+	padding: 5px;
+	margin: 5px;
+}
+
+#content #category-title {
+	color: #444;
+	font-size: 18px;
+	line-height: 20px;
+	margin: 0 5px;
+}
+
+#content ul#entry-list {
+	list-style: none;
+	margin: 15px 0;
+	padding: 0;
+}
+
+#content ul#entry-list li.entry {
+	border-bottom: 1px solid #EBEBEB;
+	list-style: none;
+	margin: 0;
+	padding: 5px;
+}
+
+#content ul#entry-list li.entry .votes {
+	float: left;
+	margin: 0 10px 0 0;
+	width: 30px;
+	text-align: center;
+}
+
+#content ul#entry-list li.entry .votes .center {
+	text-align: center;
+}
+
+#content ul#entry-list li.entry .votes div.vote-up {
+	width: 0;
+	height: 0;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-bottom: 7px solid black;
+	cursor: pointer;
+	margin: 5px auto 0;
+}
+
+#content ul#entry-list li.entry .votes div.vote-up.selected {
+	border-bottom: 7px solid #0693D9;
+}
+
+#content ul#entry-list li.entry .votes div.vote-down {
+	width: 0;
+	height: 0;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-top: 7px solid black;
+	cursor: pointer;
+	margin: 0 auto 5px;
+}
+
+#content ul#entry-list li.entry .votes div.vote-down.selected {
+	border-top: 7px solid #0693D9;
+}
+
+#content ul#entry-list li.entry .votes div.score {
+	text-align: center;
+	margin: 4px auto;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#content ul#entry-list li.entry .body .thumbnail {
+	float: left;
+	width: 70px;
+	margin: 0 5px 0;
+}
+
+#content ul#entry-list li.entry .body {
+	float: left;
+	margin: 0 5px 0 0;
+	width: 540px;
+}
+
+#content ul#entry-list li.entry .body h3.title {
+	margin: 0 0 3px 0;
+}
+
+#content ul#entry-list li.entry .body h3.title a {
+	color: #000;
+	font-size: 15px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#content ul#entry-list li.entry .body .domain {
+	margin: 0 0 3px 0;
+}
+
+#content ul#entry-list li.entry .body .domain a {
+	font-size: 10px;
+	font-style: italic;
+	color: #444;
+	text-decoration: none;
+	color: #444;
+}
+
+#content ul#entry-list li.entry .body .meta {
+	color: #999;
+}
+
+#content ul#entry-list li.entry .body .meta .author,
+#content ul#entry-list li.entry .body .meta a.subreddit {
+	color: #0693D9;
+	text-decoration: none;
+}
+
+#content ul#entry-list li.entry .status {
+	float: right;
+}
+
+#content ul#entry-list li.entry .comments {
+	float: right;
+	background-color: #444;
+	color: #fff;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	padding: 3px;
+}
+
+#content ul#entry-list li.entry .comments .label {
+	display: block;
+	font-size: 12px;
+	color: #999;
+}
+
+#content ul#entry-list li.entry .comments .count {
+	display: block;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: right;
+	color: #fff;
+}
+
+#footer {
+	width: 100%;
+	margin: 10px 0;
+}
+
+#footer .footer-content {
+	text-align: left;
+	width: 960px;
+	margin: 0 auto;
+	padding: 5px 0 10px;
+}
+
+#footer .footer-content p {
+	padding: 5px 0;
+}
+
+
+
+
+/*
+ * Popup Login and Submit Link Blocks
+ */
+ 
+div#login-block,
+div#submit-link-block {
+	background-color: #E6E2DF;
+	border: 1px solid black;
+	text-align: center;
+}
+
+div#login-block div.header,
+div#submit-link-block div.header {
+	background-color: #000;
+	color: #fff;
+	text-align: left;
+	margin: 0 auto 0;
+	padding: 3px;
+}
+
+div#login-block div.header h1,
+div#submit-link-block div.header h1 {
+	font-size: 20px;
+	line-height: 22px;
+	margin: 0 0 0 10px;
+}
+
+div#login-block div.content,
+div#submit-link-block div.content {
+	text-align: left;
+	margin: 0 auto 10px;
+}
+
+div#login-block div.content ul.alerts,
+div#submit-link-block div.content ul.alerts {
+	list-type: none;
+	border: 1px solid orange;
+	background-color: #F6E69F;
+	color: #000;
+	margin: 5px 5px 0;
+}
+
+div#login-block div.content ul.alerts li,
+div#submit-link-block div.content ul.alerts li {
+	list-type: disc;
+	padding: 5px;
+	margin: 3px 0;
+}
+
+
+div#login-block div.content ul, 
+div#submit-link-block div.content ul{
+	list-type: none;
+	margin: 10px 0 0 10px;
+	padding: 0;
+}
+
+div#login-block div.content li,
+div#submit-link-block div.content li {
+	list-type: none;
+	margin: 5px 0;
+}
+
+div#login-block div.content li label,
+div#submit-link-block li label {
+	display: block;
+	margin: 5px 0;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+div#login-block div.content li input.username,
+div#login-block div.content li input.password,
+div#submit-link-block div.content li textarea.title,
+div#submit-link-block div.content li input.url {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	width: 180px;
+	font-size: 16px; 
+}
+
+div#submit-link-block div.content li textarea.title {
+	width: 500px;
+	height: 50px;
+}
+
+div#submit-link-block div.content li input.url {
+	width: 500px;
+}
+
+div#login-block div.content li input.submit,
+div#submit-link-block div.content li input.submit {
+	background-color: #0693D9;
+	color: #fff;
+	border: none;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	margin: 5px 0 0;
+	padding: 5px;
+	cursor: pointer;
+}
+
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+} 
+
+.clearfix {display:inline-block;}
+/* Hide from IE Mac \*/
+.clearfix {display:block;}
+/* End hide from IE Mac */

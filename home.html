@@ -1,0 +1,328 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="styles/reset.css" media="screen"/>
+		<link rel="stylesheet" href="styles/style.css" media="screen"/>
+		<link rel="stylesheet" href="styles/colorbox.css" media="screen"/>
+		<script src="scripts/jquery.min.js"></script>
+		<script src="scripts/jquery.colorbox-min.js"></script>
+		<script src="scripts/vsreddit.js"></script>
+	  <script src="scripts/JSON.js"></script>
+	  <script type="text/javascript">
+	  $(document).ready(function(){
+	  
+	  	// click event for login button
+	  	$(".login-btn").colorbox({
+	  		width:"400", 
+	  		inline:true, 
+	  		href:"#login-block",
+	  		onClosed:function() {
+					$("#login-block input[name=username]").val('');
+				}						
+	  	});
+	  
+	  	// clic event for reload button
+	  	$('div.reload-btn').click( function() {
+	  		vsreddit.reloadLinks();
+	  	});
+	  
+			// hover event for displaying category in header	  
+	  	$('div#categories').hover(
+				function() { 
+					$('ul', this).css('display', 'block');
+					$(this).addClass('over'); 
+				},
+				function() { 
+					$('ul', this).css('display', 'none');
+					$(this).removeClass('over');   
+			});
+			
+			// click event for selecting category
+			$("#category-list li.option").click( function() {
+				var category = $(this).html();
+				var sort = $("div#sort-type a").html();
+				console.log('category: ' + category);
+				// set category title
+				$("#category-title").html(category);
+				
+				// set links filtered by category
+				$("#entry-list").html(outputLinks(vsreddit, sort, category));
+				
+				// hide category dropdown list
+				$("div#categories ul").css('display', 'none');
+			});
+			
+			// click event for selecting sort options
+			$("div#sort-type a").click( function() {
+				var sort = $(this).html();
+				var category = $("#category-title").html();
+				$("#entry-list").html(outputLinks(vsreddit, sort, category));
+				$("div#sort-type a").removeClass("selected");
+				$(this).addClass("selected");
+			});
+			
+			// hover event for listing account navigation
+	  	$('div#nav-account').hover(
+				function() { 
+					$('ul', this).css('display', 'block');
+					$(this).addClass('over'); 
+				},
+				function() { 
+					$('ul', this).css('display', 'none');
+					$(this).removeClass('over');   
+			});
+			
+			// click event for account navigation, mainly logout
+			$("#nav-account li.option").click( function() {
+				var option = $(this).html();
+				console.log('navaccount: ' + option);
+				if(option == "Logout") {
+					accountLogout();	
+				}
+				$("div#nav-account ul").css('display', 'none');
+			});	
+			
+			// click event for submit link button
+			$("#submit-link-btn").click( function() {
+				if(getAccount() != null) {
+					console.log("logged in, open submit link block");
+					$.colorbox({
+						width:"600", 
+						inline:true, 
+						href:"#submit-link-block",
+						onClosed:function() {
+							$("#submit-link-block textarea[name=title]").val('');
+							$("#submit-link-block input[name=url]").val('');
+							$("#submit-link-block option:selected").removeAttr("selected");
+							$("#submit-link-block .alerts").html('');
+							$("#submit-link-block .alerts").css("display","none");
+							console.log("submitlink.click onOpen");
+						}
+					});
+				}
+				else {
+					console.log("not logged in, open login block");
+					$.colorbox({
+						width:"400", 
+						inline:true, 
+						href:"#login-block",
+						onClosed:function() {
+							$("#login-block input[name=username]").val('');
+						}						
+					});
+				}
+			});
+			
+			
+			// Click event for recent view
+			$(".entry .title a").click( function() {
+				var raw_id = $(this).parent().parent().parent().attr('class').match(/id-[\w]*/)[0];
+				var id = raw_id.substr(3);
+				console.log("addRecentViews:" + id);
+				vsreddit.addRecentView(id);
+				$("#recent-views-list").html(outputRecentViews(vsreddit));
+			});
+			
+			// Click event for selecting category from dropdown
+			$(".entry div.meta a.subreddit").click( function() {
+				var category = $(this).html();
+				var sort = "default";
+				$("#entry-list").html(outputLinks(vsreddit, sort, category));
+				$("#sort-type a").removeClass("selected");
+				$("#sort-type a.default").addClass("selected");
+				$("#category-title").html(category);
+			});
+	  });
+	  
+	  </script>
+	</head>
+	<body>
+		<div id="header">
+			<div class="header-content">
+				<h1 id="sitename">vs.reddit</h1>
+				<div id="categories">
+					<div class="arrow-btn"><div class='down'></div></div>
+					<div class="label">Categories</div>
+					<div class="clearfix"></div>
+					<ul id="category-list" style="display: none">
+						<li class="option">All</li>
+						<!--
+						<li class="option">Reddit.com</li>
+						<li class="option">Funny</li>
+						<li class="option">Gaming</li>
+						<li class="option">FFFFFFFUUUUUUUUUUUU</li>
+						-->
+					</ul>
+				</div>
+				<div class="reload-btn">Reload Data</div>
+				<div class='login-btn'>Login</div>
+				<div id="nav-account" style="display: none">
+					<div class="arrow-btn"><div class="down"></div></div>
+					<div class="name">Name</div>
+					<div class="clearfix"></div>
+					<ul id="nav-account-list" style="display: none">
+						<li class="option">Logout</li>
+					</ul>
+				</div>
+			</div> <!-- END div.header-content -->
+		</div> <!-- END div#header -->
+		
+		<div id="wrap">
+			<div id="content" class="clearfix">
+			
+				<div id="main">
+					<div class='messages'></div>
+					
+					<div id="sort-type">
+						<a href="#default" class="default selected" onclick="">Default</a> &middot;
+						<a href="#top" class="top" onclick="">Top</a> &middot;
+						<a href="#latest" class="latest" onclick="">Latest</a>
+					</div>
+					<h2 id='category-title'>All</h2>
+					<ul id="entry-list">
+						<!--
+						<li class="entry clearfix">
+							<div class='votes'>
+								<div class='vote-up selected' onclick="voteLink(this,'t3_abc123', 1);"></div>
+								<div class='score'>100</div>
+								<div class='vote-down' onclick="voteLink(this,'t3_abc123', -1);"></div>	
+							</div>
+							<div class='body'>
+								<h3 class="title"><a href='#' target='_blank'>Hello World</a></h3>
+								<div class="domain"><a href='#'>www.google.com</a></div>
+								<div class="meta">Submitted 1 hour ago by <span class='username'>user</span> to <span class='category'>category</span></div>
+							</div>
+							<div class="comments">
+								<span class='label'>comments</span>
+								<span class='count'>150</span>
+							</div>
+						</li>		
+						<li class="entry clearfix">
+							<div class='votes'>
+								<div class='vote-up selected'></div>
+								<div class='score'>100</div>
+								<div class='vote-down'></div>
+							</div>
+							<div class='body'>
+								<h3 class="title"><a href='#' target='_blank'>Hello World</a></h3>
+								<div class="domain"><a href='#'>www.google.com</a></div>
+								<div class="meta">Submitted 1 hour ago by <span class='username'>user</span> to <span class='category'>category</span></div>
+							</div>
+							<div class="status">
+								<div class="comments">
+									<span class='label'>comments</span>
+									<span class='count'>150</span>
+								</div>
+							</div>
+						</li>
+						<li class="entry clearfix">
+							<div class='votes'>
+								<div class='vote-up selected'></div>
+								<div class='score'>100</div>
+								<div class='vote-down'></div>	
+							</div>
+							<div class='body'>
+								<h3 class="title"><a href='#' target='_blank'>Hello World</a></h3>
+								<div class="domain"><a href='#'>www.google.com</a></div>
+								<div class="meta">Submitted 1 hour ago by <span class='username'>user</span> to <span class='category'>category</span></div>
+							</div>
+							<div class="status">
+								<div class="comments">
+									<span class='label'>comments</span>
+									<span class='count'>150</span>
+								</div>
+							</div>
+						</li>						
+						-->
+						
+					</ul>		
+				</div> <!-- END div#main -->
+				
+				<div id="right-sidebar">
+					<div id="submit-link-btn">Submit Link</div>
+					<div id="my-upvotes">
+						<h2>Up Votes</h2>
+						<ul id="my-upvotes-list" class="list"></ul>
+					</div>
+					<div id="my-downvotes">
+						<h2>Down Votes</h2>
+						<ul id="my-downvotes-list" class="list"></ul>
+					</div>
+					<div id="recent-views">
+						<h2>Recent Views</h2>
+						<ul id="recent-views-list" class="list"></ul>
+					</div>
+				</div>
+			</div> <!-- END div#content -->	
+		</div> <!-- END div#wrap -->
+		
+		<div id="footer">
+			<div class="footer-content">
+				<p>Created by <a href="http://vincentsamaco.com/" target="_blank">Vincent Samaco</a></p>
+				<p>Reddit <a href="http://www.reddit.com/r/blog/comments/fjgit/reddit_is_doubling_the_size_of_its_programming/" target="_blank">Frontend challenge</a></p>
+			</div>
+		</div> <!-- END div#footer -->
+		
+		<div style="display:none">
+			<div id="login-block">
+				<div class="header">
+					<h1>Login</h1>
+				</div>
+				<div class="content">
+					<ul class="alerts" style="display: none">
+					</ul>
+					<form id="submit-login-form" onsubmit="submitLogin(this);return false;">
+					<ul>
+						<li>
+							<label for="username">Username:</label>
+							<input type="text" name="username" class="username"/>
+						</li>
+						<li>
+							<label for="password">Password:</label>
+							<input type="text" name="password" class="password" disabled="DISABLED" value="NO PASSWORD">
+						</li>
+						<li>
+							<input type="submit" name="submit" class="submit" value="Login"/>
+						</li>
+					</ul>
+					</form>
+				</div>
+			</div>
+			
+			<div id="submit-link-block">
+				<div class="header">
+					<h1>Submit Link</h1>
+				</div>
+				<div class="content">
+					<ul class="alerts" style="display:none">
+					</ul>
+					<form id="submit-link-form" onsubmit="submitLink(this);return false;">
+						<ul>
+							<li>
+								<label for="title">Title:</label>
+								<textarea type="text" name="title" class="title"/></textarea>
+							</li>
+							<li>
+								<label for="url">Url:</label>
+								<input type="text" name="url" class="url">
+							</li>
+							<li>
+								<label for="subreddit">Category:</label>
+								<select name="subreddit" class="subreddit">
+									<!--
+									<option value="reddit.com" selected=SELECTED>reddit.com</option>
+									<option value="funny">funny</option>
+									-->
+								</select>
+							</li>
+							<li>
+								<input type="submit" name="submit" class="submit" value="submit"/>
+							</li>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		
+	</body>
+</html>
