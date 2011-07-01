@@ -152,14 +152,15 @@ var vsreddit = new function() {
 		localStorage.removeItem('votes');
 		localStorage.removeItem('recent_views');
 		
-		resetPage();
+		//resetPage();
 		
-		var source = "data.js";
+		var source = "http://www.reddit.com/.json?jsonp=loadData";//"data.js";
 		$.ajax({
 			url: source, 
-			dataType: "json", 
+			dataType: "jsonp", 
+			crossDomain: true,
 			success: function(data) {
-				var links = JSON.stringify(data.data.children);
+				/*var links = JSON.stringify(data.data.children);
 				localStorage.setItem('links', links);
 				
 				vsreddit.initLinks();
@@ -168,15 +169,30 @@ var vsreddit = new function() {
 				initPage();
 				
 				$("#main div.messages").html("<p class='message'>Reload links and votes success</p>");
-				console.log("reloadLinks json:" + source + " success");
+				console.log(data);
+				console.log("reloadLinks json:" + source + " success");*/
 			},
 			error: function(data) {
 				$("#main div.messages").html("<p class='message'>Reload links and votes failed</p>");
 				console.log("resetLink json:" + source + " failed");
 			}
 		});	
-	};
+	};	
+}
+
+function loadData(data)
+{
+	var links = JSON.stringify(data.data.children);
+	localStorage.setItem('links', links);
 	
+	vsreddit.initLinks();
+	vsreddit.initVotes();
+	vsreddit.initRecentViews();
+	initPage();
+	
+	$("#main div.messages").html("<p class='message'>Reload links and votes success</p>");
+	console.log(data);
+	console.log("reloadLinks json:" + source + " success");
 }
 
 $(document).ready(function(){
