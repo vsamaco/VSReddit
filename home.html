@@ -1,4 +1,5 @@
-<!doctype html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	<head>
 		<link rel="stylesheet" href="styles/reset.css" media="screen"/>
@@ -20,11 +21,16 @@
 					$("#login-block input[name=username]").val('');
 				}						
 	  	});
+	
+	  	$(".readme-btn").colorbox({width:"80%", height:"80%", iframe:true});
 	  
 	  	// clic event for reload button
 	  	$('div.reload-btn').click( function() {
-	  		vsreddit.reloadLinks();
-	  	});
+	  		if(confirm('Are you sure you want to reload all stories/votes/views?'))
+				{
+					vsreddit.reloadLinks();
+  			}
+			});
 	  
 			// hover event for displaying category in header	  
 	  	$('div#categories').hover(
@@ -155,6 +161,7 @@
 					</ul>
 				</div>
 				<div class="reload-btn">Reload Data</div>
+				<a class="readme-btn" href="README.txt">README</a>
 				<div class='login-btn'>Login</div>
 				<div id="nav-account" style="display: none">
 					<div class="arrow-btn"><div class="down"></div></div>

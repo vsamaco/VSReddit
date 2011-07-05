@@ -36,9 +36,6 @@ Features:
 - Tracks Recent Views
 
 Requirements:
-The site must be accessed via webserver like Apache in order for JSON data to be accessed
-with jQuery ajax call.
-
 The site must be previewed in Chrome, as I did no cross browser testing, in order for all 
 functions to work and styles display properly.
 

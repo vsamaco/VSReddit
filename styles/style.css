@@ -70,6 +70,22 @@ h1, h2, h3, h4, h5, h6 {
 	cursor: pointer;
 }
 
+#header .readme-btn {
+	position: absolute;
+	background-color: #444;
+	color: #fff;
+	font-size: 12px;
+	text-transform: uppercase;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	top: 10px;
+	left: 310px;
+	padding: 5px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
 #header #submit-link-btn {
 	position: absolute;
 	background-color: #444;

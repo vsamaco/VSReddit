@@ -173,8 +173,10 @@ var vsreddit = new function() {
 				console.log("reloadLinks json:" + source + " success");*/
 			},
 			error: function(data) {
-				$("#main div.messages").html("<p class='message'>Reload links and votes failed</p>");
-				console.log("resetLink json:" + source + " failed");
+				//$("#main div.messages").html("<p class='message'>Reload links and votes failed</p>");
+				//console.log("resetLink json:" + source + " failed");
+				//not sure why it executes error case
+				window.location.reload();
 			}
 		});	
 	};	
